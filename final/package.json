@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "alphavantage": "^1.1.1",
     "firebase": "^4.13.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
