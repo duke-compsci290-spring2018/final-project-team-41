@@ -3,10 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "alphavantage": "^1.1.1",
     "firebase": "^4.13.1",
+    "node-fetch": "^2.1.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4"
+    "react-helmet": "^5.2.0",
+    "react-scripts": "1.1.4",
+    "stocks.js": "0.0.17",
+    "victory": "^0.26.0"
   },
   "scripts": {
     "start": "react-scripts start",
