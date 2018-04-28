@@ -10,13 +10,14 @@ class Graph extends Component{
     return (
       <VictoryChart
   theme={VictoryTheme.material}
+  scale={{ x: "time" }}
 >
   <VictoryLine
     style={{
       data: { stroke: "#c43a31" },
       parent: { border: "1px solid #ccc"}
     }}
-    data={this.state['data']}
+    data={this.props.points}
   />
 </VictoryChart>
     )
