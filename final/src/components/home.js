@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Graph from './Graph.js';
+import { VictoryBar,VictoryChart,VictoryLine,VictoryTheme } from 'victory';
 
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 

@@ -3,7 +3,7 @@ import firebase, { auth, provider } from './firebase.js';
 import './App.css';
 import Graph from './components/Graph.js';
 import Home from './components/home';
-
+import Explore from './components/explore'
 
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 var users = firebase.database().ref('users');
@@ -98,11 +98,11 @@ class App extends Component {
       return null;
       // return <Trending />
     }else if(this.state.tab === 3) {
-      return null;
-      // return <Explore />
+      //return null;
+      return <Explore ticker = {[]}/>
     }else if(this.state.tab === 4) {
       return null;
-      // return <Predict />
+      //return <Predict ticker = {[]}/>
     }
   }
 
