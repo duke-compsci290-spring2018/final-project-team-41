@@ -86,7 +86,6 @@ class App extends Component {
 			         });
 			         this.setState(prevState => ({
 				          stocks: newStocks,
-                  tab:1
 			         }));
                console.log('Log in successful');
           }
