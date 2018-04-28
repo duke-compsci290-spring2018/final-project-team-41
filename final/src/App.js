@@ -3,6 +3,7 @@ import firebase, { auth, provider } from './firebase.js';
 import './App.css';
 import Graph from './components/Graph.js';
 import Home from './components/home';
+import Trending from './components/trending';
 
 
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
@@ -33,7 +34,7 @@ class App extends Component {
       items: [],
       user: null,
 	    stocks: ['MSFT','AMZN'],
-      tab: 1
+      tab: 2
     }
   }
 
@@ -41,7 +42,8 @@ class App extends Component {
     auth.signOut()
     .then(() => {
       this.setState({
-        user: null
+        user: null,
+        tab:2
       });
     });
   }
@@ -62,29 +64,29 @@ class App extends Component {
               existed = true;
 			        oldUser = itemSnapshot['key'];
             }
-
           });
-          if(!existed) {
+          if(!existed) { //new user
             firebase.database().ref('users').push({
               name: newUser.displayName,
               email: newUser.email,
               stocks: ['FB']
             });
-			this.setState(prevState => ({
-				stocks: [...prevState.stocks, 'FB']
-			}));
-          }else{
-			var newStocks = [];
-			var st = firebase.database().ref('users/'+oldUser+"/stocks");
-			st.on("value", function(snapshot) {
-				snapshot.forEach((itemSnapshot)=> {
-					newStocks.push(itemSnapshot.val());
-				});
-			});
-			this.setState(prevState => ({
-				stocks: [...prevState, newStocks]
-			}));
-            console.log('Log in successful');
+			      this.setState(prevState => ({
+				       stocks: [...prevState.stocks, 'FB']
+			      }));
+          }else{ // returning user
+			         var newStocks = [];
+			         var st = firebase.database().ref('users/'+oldUser+"/stocks");
+			         st.on("value", function(snapshot) {
+				          snapshot.forEach((itemSnapshot)=> {
+					        newStocks.push(itemSnapshot.val());
+				          });
+			         });
+			         this.setState(prevState => ({
+				          stocks: newStocks,
+                  tab:1
+			         }));
+               console.log('Log in successful');
           }
         });
     });
@@ -95,8 +97,7 @@ class App extends Component {
     if(this.state.tab === 1) {
       return <Home stocks={this.state.stocks} />
     }else if(this.state.tab === 2) {
-      return null;
-      // return <Trending />
+      return <Trending stocks={this.state.stocks}/>
     }else if(this.state.tab === 3) {
       return null;
       // return <Explore />
@@ -108,15 +109,22 @@ class App extends Component {
 
   changeTab(event) {
     var newTab = event.target.innerHTML;
-    if(newTab.includes("Home")) {
-      this.setState({tab:1});
-    }else if(newTab.includes("Trending")) {
+    if(newTab.includes("Trending")) {
       this.setState({tab:2});
-    }else if(newTab.includes("Explore")) {
-      this.setState({tab:3});
-    }else if(newTab.includes("Predict")) {
-      this.setState({tab:4});
+      return;
     }
+    if(this.state.user){
+      if(newTab.includes("Home")) {
+        this.setState({tab:1});
+      }else if(newTab.includes("Explore")) {
+        this.setState({tab:3});
+      }else if(newTab.includes("Predict")) {
+        this.setState({tab:4});
+      }
+    }else{
+      alert('Please Log In');
+    }
+
   }
 
   render() {
@@ -127,14 +135,16 @@ class App extends Component {
       <li><a onClick={this.changeTab}>Trending</a></li>
       <li><a onClick={this.changeTab}>Explore</a></li>
       <li><a onClick={this.changeTab}>Predict</a></li>
+      <li id='loginBtn'>
+      {this.state.user ?
+        <a onClick={this.logout}>Log Out</a>
+      :
+        <a onClick={this.login}>Log In</a>
+      }
+      </li>
     </ul>
       <div>
-        <h1>Stock</h1>
-          {this.state.user ?
-            <button onClick={this.logout}>Log Out</button>
-          :
-            <button onClick={this.login}>Log In</button>
-          }
+
         {this.state.user ?
         <div>
             <h4>{this.state.user.displayName}</h4>
@@ -150,23 +160,5 @@ class App extends Component {
     );
   }
 }
-// window.dp=[
-//       { x: 1, y: 2 },
-//       { x: 2, y: 3 },
-//       { x: 3, y: 5 },
-//       { x: 4, y: 4 },
-//       { x: 5, y: 7 }
-//     ];
-//  window.time=[
-//                 { x: new Date(1982, 1, 1), y: 125 },
-//                 { x: new Date(1987, 1, 1), y: 257 },
-//                 { x: new Date(1993, 1, 1), y: 345 },
-//                 { x: new Date(1997, 1, 1), y: 515 },
-//                 { x: new Date(2001, 1, 1), y: 132 },
-//                 { x: new Date(2005, 1, 1), y: 305 },
-//                 { x: new Date(2011, 1, 1), y: 270 },
-//                 { x: new Date(2015, 1, 1), y: 470 }
-//               ];
-
 
 export default App;
