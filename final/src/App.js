@@ -5,11 +5,13 @@ import Graph from './components/Graph.js';
 import Home from './components/home';
 import Explore from './components/explore'
 import Trending from './components/trending';
-import Predict from './components/prediction'
+import Predict from './components/prediction';
+import Admin from './components/admin';
 
-
+const ADMIN_EMAIL = "stocknotebook1@gmail.com";
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 var users = firebase.database().ref('users');
+var trendingRef = firebase.database().ref('trending');
 
 class App extends Component {
   constructor(props) {
@@ -30,6 +32,8 @@ class App extends Component {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.changeTab = this.changeTab.bind(this);
+    this.isAdmin = false;
+    this.trending= [];
     this.state = {
       currentItem: '',
       username: '',
@@ -37,25 +41,22 @@ class App extends Component {
       user: null,
       userRef: null,
 	    stocks: ['MSFT','AMZN'],
-      tab: 2
+      tab: 3
     }
   }
-  //
-  // componentDidMount() {
-  //   if(!this.state.userRef) {
-  //     var newStocks = []
-  //     this.state.userRef.on("value", function(snapshot) {
-  //        snapshot.forEach((itemSnapshot)=> {
-  //            newStocks.push(itemSnapshot.val());
-  //        });
-  //     });
-  //     this.setState({
-  //       stocks: newStocks
-  //     });
-  //   }
-  // }
+
+  componentWillMount() {
+    var tempTrending = [];
+    trendingRef.on("value", function(snapshot) {
+       snapshot.forEach((itemSnapshot)=> {
+           tempTrending.push(itemSnapshot.val());
+       });
+    });
+    this.trending = tempTrending;
+  }
 
   logout() {
+    this.isAdmin = false;
     auth.signOut()
     .then(() => {
       this.setState({
@@ -75,6 +76,9 @@ class App extends Component {
         var existed = false;
         var newUser = this.state.user;
 		    var oldUser = "";
+        if(newUser.email === ADMIN_EMAIL) {
+          this.isAdmin = true;
+        }
         users.once("value",(snapshot)=>{
           snapshot.forEach((itemSnapshot)=> {
             if(itemSnapshot.child('email').val() == newUser.email){
@@ -114,19 +118,30 @@ class App extends Component {
     if(this.state.tab === 1) {
       return <Home stocks={this.state.stocks} userRef={this.state.userRef}/>
     }else if(this.state.tab === 2) {
-      return <Trending />
+      return <Trending stocks={this.trending}/>
     }else if(this.state.tab === 3) {
       return <Explore userRef={this.state.userRef}/>
     }else if(this.state.tab === 4) {
-      //return null;
       return <Predict ticker = {[]}/>
+    }else if(this.state.tab === 5) {
+      return <Admin stocks={this.trending} trendingRef={trendingRef}/>;
     }
   }
 
   changeTab(event) {
     var newTab = event.target.innerHTML;
     if(newTab.includes("Trending")) {
+      var tempTrending = [];
+      trendingRef.on("value", function(snapshot) {
+         snapshot.forEach((itemSnapshot)=> {
+             tempTrending.push(itemSnapshot.val());
+         });
+      });
       this.setState({tab:2});
+      this.trending = tempTrending;
+      return;
+    }else if(newTab.includes("Explore")) {
+      this.setState({tab:3});
       return;
     }
     if(this.state.user){
@@ -141,10 +156,10 @@ class App extends Component {
           stocks: newStocks,
           tab:1
         });
-      }else if(newTab.includes("Explore")) {
-        this.setState({tab:3});
       }else if(newTab.includes("Predict")) {
         this.setState({tab:4});
+      }else if(newTab.includes("Admin")) {
+        this.setState({tab:5});
       }
     }else{
       alert('Please Log In');
@@ -155,11 +170,14 @@ class App extends Component {
   render() {
     return (
 	<div>
-    <ul>
+    <ul className="navbar">
       <li><a onClick={this.changeTab}>Home</a></li>
       <li><a onClick={this.changeTab}>Trending</a></li>
       <li><a onClick={this.changeTab}>Explore</a></li>
       <li><a onClick={this.changeTab}>Predict</a></li>
+      {this.isAdmin &&
+        <li><a onClick={this.changeTab}>Admin</a></li>
+      }
       <li id='loginBtn'>
       {this.state.user ?
         <a onClick={this.logout}>Log Out</a>

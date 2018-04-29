@@ -1,25 +1,8 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
 }
 
 .sameline{
@@ -39,7 +22,7 @@
   to { transform: rotate(360deg); }
 }
 
-ul {
+.navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -47,11 +30,11 @@ ul {
     background-color: #333;
 }
 
-li {
+.navbar li {
     float: left;
 }
 
-li a {
+.navbar li a {
     display: block;
     color: white;
     text-align: center;
@@ -59,12 +42,14 @@ li a {
     text-decoration: none;
 }
 
-li a:hover:not(.active) {
+.navbar li a:hover:not(.active) {
     background-color: #111;
 }
 
-
-
 #loginBtn {
   float: right;
+}
+
+.trending-li {
+  display: block;
 }

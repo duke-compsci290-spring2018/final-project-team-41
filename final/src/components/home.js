@@ -58,6 +58,7 @@ class Home extends Component {
 	     return  <div className = "graphgrid" key = {stock}><h3>{stock}</h3><button onClick={() => this.removeStock(stock)}>x</button><Graph points = {this.state.graphData[i]}/></div>;
 	  });
   }
+  
   filterStocks(){
 	  var range = document.getElementById("filterpicker").value;
 	  this.currStocks = [];

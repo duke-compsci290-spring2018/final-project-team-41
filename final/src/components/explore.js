@@ -28,20 +28,25 @@ class Explore extends Component{
 	 addStock(){
 		 var newStock = document.getElementById("pred").value.toUpperCase();
 		 var existed = false;
-		 this.props.userRef.once("value",(snapshot)=>{
-			 snapshot.forEach((itemSnapshot)=> {
-				 if(newStock === itemSnapshot.val()){
-					 existed = true;
-					 return;
-				 }
+		 if(this.props.userRef != null){
+			 this.props.userRef.once("value",(snapshot)=>{
+				 snapshot.forEach((itemSnapshot)=> {
+					 if(newStock === itemSnapshot.val()){
+						 existed = true;
+						 return;
+					 }
+				 });
 			 });
-		 });
-		 if(!existed){
-			 this.props.userRef.push(newStock);
-			 alert("Stock added to YOUR STOCKS");
+			 if(!existed){
+				 this.props.userRef.push(newStock);
+				 alert("Stock added to YOUR STOCKS");
+			 }else{
+				 alert(newStock+" is already in YOUR STOCKS");
+			 }
 		 }else{
-			 alert(newStock+" is already in YOUR STOCKS");
+			 alert("Please Log In");
 		 }
+
 	 }
 
 	 setTicker(){

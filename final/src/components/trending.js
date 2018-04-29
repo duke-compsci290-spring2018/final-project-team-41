@@ -7,13 +7,12 @@ class Trending extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stocks: ['MSFT','AMZN'],
       graphData: []
     }
   }
 
-  componentDidMount() {
-	   return this.state.stocks.map((stock,i)=>{
+  componentWillMount() {
+	   return this.props.stocks.map((stock,i)=>{
 	      alpha.data.daily(stock).then(data => {
 		        var temparr = [];
 			      var temp = data['Time Series (Daily)'];
@@ -30,7 +29,7 @@ class Trending extends Component {
   }
 
   renderGraphs(){
-	  return this.state.stocks.map((stock,i)=>{
+	  return this.props.stocks.map((stock,i)=>{
 	     return <div className = "graphgrid" key = {stock}><h3>{stock}</h3><Graph  points = {this.state.graphData[i]}/></div>;
 	  });
   }
