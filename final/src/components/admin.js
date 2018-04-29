@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 
 class Admin extends Component {
   constructor(props){
@@ -12,28 +13,32 @@ class Admin extends Component {
 
   addStock() {
     var newStock = document.getElementById('adminInput').value.toUpperCase();
-    var existed = false;
-    this.props.trendingRef.once("value",(snapshot)=>{
-      snapshot.forEach((itemSnapshot)=> {
-        if(newStock === itemSnapshot.val()){
-          existed = true;
-          return;
-        }
+
+    alpha.data.daily(newStock).then(data => {
+      var existed = false;
+      this.props.trendingRef.once("value",(snapshot)=>{
+        snapshot.forEach((itemSnapshot)=> {
+          if(newStock === itemSnapshot.val()){
+            existed = true;
+            return;
+          }
+        });
       });
-    });
-    var copy = this.current.slice(0);
-    if(!existed){
-      this.props.trendingRef.push(newStock);
-      alert("Stock added to TRENDING STOCKS");
-    }else{
-      alert(newStock+" is already in TRENDING STOCKS");
+      var copy = this.current.slice(0);
+      if(!existed){
+        this.props.trendingRef.push(newStock);
+        alert("Stock added to TRENDING STOCKS");
+      }else{
+        alert(newStock+" is already in TRENDING STOCKS");
+      }
+      copy.push(newStock);
+      this.current = copy;
+      var temp = this.state.dummy+1;
+      this.setState(prevState => ({
+        dummy: temp
+      }));
     }
-    copy.push(newStock);
-    this.current = copy;
-    var temp = this.state.dummy+1;
-    this.setState(prevState => ({
-      dummy: temp
-    }));
+    ).catch(function(error) { alert("invalid stock ticker"); });
   }
 
   removeStock(stock) {

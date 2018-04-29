@@ -6,12 +6,14 @@ const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 class Trending extends Component {
   constructor(props) {
     super(props);
+    this.currStocks = [];
     this.state = {
       graphData: []
     }
   }
 
   componentWillMount() {
+    this.currStocks = [];
 	   return this.props.stocks.map((stock,i)=>{
 	      alpha.data.daily(stock).then(data => {
 		        var temparr = [];
@@ -20,6 +22,7 @@ class Trending extends Component {
               temparr.push({x:new Date(k),y:parseFloat(temp[k]['1. open'])});
 			      }
 			      var newGraphData = this.state.graphData;
+            this.currStocks.push(stock);
 			      newGraphData.push(temparr);
 			      this.setState({
 				       graphData: newGraphData
@@ -29,7 +32,7 @@ class Trending extends Component {
   }
 
   renderGraphs(){
-	  return this.props.stocks.map((stock,i)=>{
+	  return this.currStocks.map((stock,i)=>{
 	     return <div className = "graphgrid" key = {stock}><h3>{stock}</h3><Graph  points = {this.state.graphData[i]}/></div>;
 	  });
   }
