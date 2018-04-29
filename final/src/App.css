@@ -26,6 +26,13 @@
 	display:inline-block;
 	vertical-align:top;
 }
+.graphgrid{
+	display: inline;
+}
+.grid{
+	display:grid;
+	grid-template-columns: auto auto;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
