@@ -59,6 +59,7 @@ class Predict extends Component{
 		 this.setState({
 			ticker:[val] 
 		 });
+		 
 		  alpha.data.daily(val).then(data => {
 			  this.tickervalid = true;
 			  document.getElementById("tick").disabled = false;
@@ -84,7 +85,8 @@ class Predict extends Component{
 			//console.log(this.state.tlinedata);
 			}
 			
-			);
+			).catch(function(error) { alert("invalid stock ticker"); });
+		 
 	 }
 	 
 	 analyze(){
@@ -121,20 +123,31 @@ class Predict extends Component{
 	 render(){
 	 return(
 	 <div>
-	 <input type="text" id = "pred"></input>
-	 <button onClick={this.setTicker}>View Stock</button>
-	 <select id = "rangepicker">
+	 <span>
+	 <div className = "rowele">  <strong>Step 1</strong> Enter Stock:  </div>
+	 <input className = "rowele" type="text" id = "pred"></input>
+	 <div className = "rowele">  <strong>Step 2</strong> Pick Range:  </div>
+	 <select className = "rowele" id = "rangepicker">
 	<option value="100">100 Days</option>
 	<option value="40">60 Days</option>
 	<option value="20">20 Days</option>
 	<option value="10">10 Days</option>
 	</select>
-	 <button onClick={this.analyze} id = "tick">Analyze Stock</button>
-	 <select id = "orderpicker">
+	
+	<div className = "rowele">  <strong>Step 3</strong> View Stock:  </div>
+	 <button  className = "rowele" onClick={this.setTicker}>View Stock</button>
+	 </span>
+	 <br></br>
+	 <span>
+	<div className = "rowele"><strong>Step 4</strong> Pick Regression Type:</div>
+	<select className = "rowele" id = "orderpicker">
 	<option value="1">Linear</option>
 	<option value="3">Polynomial</option>
 	</select>
-	
+	<div className = "rowele"><strong>Step 5</strong> Analyze:</div>
+	 <button className = "rowele" onClick={this.analyze} id = "tick">Analyze Stock</button>
+	 </span>
+	<br></br>
 	<span>
 	 {this.renderPredict()}
 		 {this.state.tlinedata.length>0 &&

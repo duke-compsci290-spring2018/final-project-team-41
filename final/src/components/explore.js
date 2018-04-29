@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Graph from './Graph.js';
+import GraphLineBrush from "./GraphLineBrush.js"
 import regression from 'regression';
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 class Explore extends Component{
@@ -17,11 +18,14 @@ class Explore extends Component{
 		 this.tickervalid = false;
 		 this.firsttime = true;
 		 document.getElementById("tick").disabled = true;
+		 document.getElementById("pred").value = "NVDA";
+		 this.setTicker();
+		 
    }
 
 	 renderExplore(){
 		 return this.state.ticker.map((stock,i)=>{
-	     return <Graph key = {stock} points = {this.state.graphData}/>;
+	     return <GraphLineBrush key = {stock} points = {this.state.graphData} tlinepoints = {[]}/>;
 	  });
 	 }
 
@@ -64,7 +68,7 @@ class Explore extends Component{
 					graphData: temparr
 				});
 			}
-			);
+			).catch(function(error) { alert("invalid stock ticker"); });
 	 }
 
 	 render(){
@@ -72,7 +76,7 @@ class Explore extends Component{
 	 <div>
 	 <input type="text" id = "pred"></input>
 	 <button onClick={this.setTicker}>Explore Stock</button>
-	 <button onClick={this.addStock} id = "tick">Add Stock</button>
+	 <button onClick={this.addStock} id = "tick">Add Stock</button><br></br>
 	 {this.renderExplore()}
 	 </div>
 	 );

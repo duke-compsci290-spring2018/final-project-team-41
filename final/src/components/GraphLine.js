@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryBar,VictoryChart,VictoryLine,VictoryTheme,VictoryContainer } from 'victory';
+import { VictoryBar,VictoryChart,VictoryLine,VictoryTheme,VictoryContainer,VictoryBrushContainer,VictoryZoomContainer } from 'victory';
 class GraphLine extends Component{
  constructor(props)
  {
@@ -12,9 +12,12 @@ class GraphLine extends Component{
       <VictoryChart
   theme={VictoryTheme.material}
   scale={{ x: "time"}}
-  width={window.innerWidth*0.7}
-  height ={window.innerHeight*0.8}
-   containerComponent={<VictoryContainer responsive={false}/>}
+  width={window.innerWidth*0.8}
+  height ={window.innerHeight*0.75}
+   containerComponent={
+              <VictoryContainer responsive={false}
+              />
+            }
 >
 {this.props.tlinepoints.length > 0 &&
  <VictoryLine

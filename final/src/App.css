@@ -29,6 +29,11 @@
 .graphgrid{
 	display: inline;
 }
+.rowele{
+	display:inline;
+	margin-left:3px;
+	margin-right:3px;
+}
 .grid{
 	display:grid;
 	grid-template-columns: auto auto;
