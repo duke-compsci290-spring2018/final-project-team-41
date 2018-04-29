@@ -117,7 +117,16 @@ class App extends Component {
     }
     if(this.state.user){
       if(newTab.includes("Home")) {
-        this.setState({tab:1});
+        var newStocks = []
+        this.state.userRef.on("value", function(snapshot) {
+           snapshot.forEach((itemSnapshot)=> {
+               newStocks.push(itemSnapshot.val());
+           });
+        });
+        this.setState({
+          stocks: newStocks,
+          tab:1
+        });
       }else if(newTab.includes("Explore")) {
         this.setState({tab:3});
       }else if(newTab.includes("Predict")) {
