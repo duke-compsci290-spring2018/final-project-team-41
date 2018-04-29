@@ -32,9 +32,29 @@ class Home extends Component {
 		});
   }
 
+  removeStock(stock) {
+    this.props.userRef.once("value",(snapshot)=>{
+      snapshot.forEach((itemSnapshot)=> {
+        if(stock === itemSnapshot.val()){
+          itemSnapshot.ref.remove();
+        }
+      });
+    });
+    var removeIndex = -1;
+    this.currStocks.forEach((s,i)=>{
+      if(s === stock){
+        removeIndex = i;
+      }
+    });
+    this.currStocks.splice(removeIndex,1);
+    var tempGraph = [...this.state.graphData];
+    tempGraph.splice(removeIndex, 1);
+    this.setState({graphData: tempGraph});
+  }
+
   renderGraphs(){
 	  return this.currStocks.map((stock,i)=>{
-	     return  <div key = {stock}><h3>{stock}</h3><Graph points = {this.state.graphData[i]}/></div>;
+	     return  <div key = {stock}><h3>{stock}</h3><button onClick={() => this.removeStock(stock)}>x</button><Graph points = {this.state.graphData[i]}/></div>;
 	  });
   }
 
