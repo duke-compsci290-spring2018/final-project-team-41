@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Graph from './Graph.js';
+import regression from 'regression';
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 class Explore extends Component{
 	 constructor(props) {
@@ -10,9 +11,10 @@ class Explore extends Component{
 		 graphData:[]
 	 }
 	 this.setTicker = this.setTicker.bind(this);
-	 this.displayValid = this.displayValid.bind(this);
+	 this.addStock = this.addStock.bind(this);
 	 }
 	 componentDidMount() {
+		 document.getElementById("tick").disabled = true;
 	   return this.props.ticker.map((stock,i)=>{
 	      alpha.data.daily(stock).then(data => {
 		    var temparr = [];
@@ -65,7 +67,10 @@ class Explore extends Component{
 	 }
 	 
 	 addStock(){
-		 
+		 console.log("hi");
+		for (var k in this.state.graphData){
+			this.state.graphData[k].y
+		}
 	 }
 	 
 	 render(){
@@ -73,7 +78,7 @@ class Explore extends Component{
 	 <div>
 	 <input type="text" id = "pred"></input>
 	 <button onClick={this.setTicker}>Explore Stock</button>
-	 <button onClick={this.addStock} id = "tick" disabled>Add Stock</button>
+	 <button onClick={this.addStock} id = "tick">Add Stock</button>
 	 {this.renderPredict()}
 	 </div>
 	 );

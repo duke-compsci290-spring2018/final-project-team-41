@@ -5,7 +5,7 @@ import Graph from './components/Graph.js';
 import Home from './components/home';
 import Explore from './components/explore'
 import Trending from './components/trending';
-
+import Predict from './components/prediction'
 
 
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
@@ -103,8 +103,8 @@ class App extends Component {
       //return null;
       return <Explore ticker = {[]}/>
     }else if(this.state.tab === 4) {
-      return null;
-      //return <Predict ticker = {[]}/>
+      //return null;
+      return <Predict ticker = {[]}/>
     }
   }
 
