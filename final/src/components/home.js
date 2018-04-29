@@ -33,9 +33,29 @@ class Home extends Component {
 		});
   }
 
+  removeStock(stock) {
+    this.props.userRef.once("value",(snapshot)=>{
+      snapshot.forEach((itemSnapshot)=> {
+        if(stock === itemSnapshot.val()){
+          itemSnapshot.ref.remove();
+        }
+      });
+    });
+    var removeIndex = -1;
+    this.currStocks.forEach((s,i)=>{
+      if(s === stock){
+        removeIndex = i;
+      }
+    });
+    this.currStocks.splice(removeIndex,1);
+    var tempGraph = [...this.state.graphData];
+    tempGraph.splice(removeIndex, 1);
+    this.setState({graphData: tempGraph});
+  }
+
   renderGraphs(){
 	  return this.currStocks.map((stock,i)=>{
-	     return  <div className = "graphgrid" key = {stock}><h3>{stock}</h3><Graph points = {this.state.graphData[i]}/></div>;
+	     return  <div className = "graphgrid" key = {stock}><h3>{stock}</h3><button onClick={() => this.removeStock(stock)}>x</button><Graph points = {this.state.graphData[i]}/></div>;
 	  });
   }
   filterStocks(){
@@ -54,7 +74,7 @@ class Home extends Component {
               temparr.push({x:new Date(k),y:parseFloat(temp[k]['1. open'])});
 			  counter = counter + 1;
 			      }
-			     
+
 			      newGraphData.push(temparr);
             this.currStocks.push(stock);
 			      this.setState({

@@ -35,7 +35,7 @@ class GraphLine extends Component{
     }}
     data={this.props.points}
   />
-  
+
 </VictoryChart>
 </div>
 

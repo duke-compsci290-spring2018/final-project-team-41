@@ -7,7 +7,7 @@ var math = require('mathjs');
 class Predict extends Component{
 	 constructor(props) {
     super(props);
-	 
+
 	 this.state = {
 		 ticker:[],
 		 graphData:[],
@@ -40,7 +40,7 @@ class Predict extends Component{
 		 return this.state.ticker.map((stock,i)=>{
 	     return <GraphLine key = {stock} points = {this.state.graphData} tlinepoints = {this.state.tlinedata}/>;
 	  });
-		 
+
 	 }
 	 computeMetrics(input){
 		 var temparray = [];
@@ -48,7 +48,7 @@ class Predict extends Component{
 			 temparray.push(input[k].y);
 		 }
 		 return math.std(temparray);
-		 
+
 	 }
 	 setTicker()
 	 {
@@ -57,7 +57,7 @@ class Predict extends Component{
 		 document.getElementById("tick").disabled = true;
 		 var val = document.getElementById("pred").value;
 		 this.setState({
-			ticker:[val] 
+			ticker:[val]
 		 });
 		 
 		  alpha.data.daily(val).then(data => {
@@ -75,7 +75,7 @@ class Predict extends Component{
 		  this.stdev = this.computeMetrics(temparr);
 		  counter = counter + 1;
 			  }
-			
+
 			this.setState({
 				graphData: temparr,
 				tlinedata:[]
@@ -88,7 +88,7 @@ class Predict extends Component{
 			).catch(function(error) { alert("invalid stock ticker"); });
 		 
 	 }
-	 
+
 	 analyze(){
 		 console.log("hi");
 		 this.trend = [];
@@ -113,13 +113,13 @@ class Predict extends Component{
 			//var tempval = Number(j)*slope+yint;
 			temptrendline.push({x:this.state.graphData[j].x,y:result.predict(Number(j))[1]});
 		}
-		
+
 		this.setState({
 			tlinedata:temptrendline
 		});
-		
+
 	 }
-	 
+
 	 render(){
 	 return(
 	 <div>

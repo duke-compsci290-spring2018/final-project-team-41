@@ -30,7 +30,7 @@ class Explore extends Component{
 	 }
 
 	 addStock(){
-		 var newStock = document.getElementById("pred").value;
+		 var newStock = document.getElementById("pred").value.toUpperCase();
 		 var existed = false;
 		 this.props.userRef.once("value",(snapshot)=>{
 			 snapshot.forEach((itemSnapshot)=> {

@@ -40,7 +40,7 @@ class App extends Component {
       tab: 2
     }
   }
-  // 
+  //
   // componentDidMount() {
   //   if(!this.state.userRef) {
   //     var newStocks = []
@@ -112,7 +112,7 @@ class App extends Component {
 
   directTab() {
     if(this.state.tab === 1) {
-      return <Home stocks={this.state.stocks} />
+      return <Home stocks={this.state.stocks} userRef={this.state.userRef}/>
     }else if(this.state.tab === 2) {
       return <Trending />
     }else if(this.state.tab === 3) {
