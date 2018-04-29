@@ -35,6 +35,7 @@ class App extends Component {
       username: '',
       items: [],
       user: null,
+      userRef: null,
 	    stocks: ['MSFT','AMZN'],
       tab: 2
     }
@@ -81,11 +82,12 @@ class App extends Component {
 			         var st = firebase.database().ref('users/'+oldUser+"/stocks");
 			         st.on("value", function(snapshot) {
 				          snapshot.forEach((itemSnapshot)=> {
-					        newStocks.push(itemSnapshot.val());
+					            newStocks.push(itemSnapshot.val());
 				          });
 			         });
 			         this.setState(prevState => ({
 				          stocks: newStocks,
+                  userRef: st
 			         }));
                console.log('Log in successful');
           }
@@ -98,10 +100,9 @@ class App extends Component {
     if(this.state.tab === 1) {
       return <Home stocks={this.state.stocks} />
     }else if(this.state.tab === 2) {
-      return <Trending stocks={this.state.stocks}/>
+      return <Trending />
     }else if(this.state.tab === 3) {
-      //return null;
-      return <Explore ticker = {[]}/>
+      return <Explore userRef={this.state.userRef}/>
     }else if(this.state.tab === 4) {
       return null;
       //return <Predict ticker = {[]}/>
