@@ -22,6 +22,11 @@
   font-size: large;
 }
 
+.sameline{
+	display:inline-block;
+	vertical-align:top;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -50,6 +55,8 @@ li a {
 li a:hover:not(.active) {
     background-color: #111;
 }
+
+
 
 #loginBtn {
   float: right;

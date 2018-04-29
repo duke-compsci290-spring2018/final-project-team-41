@@ -5,7 +5,7 @@ import Graph from './components/Graph.js';
 import Home from './components/home';
 import Explore from './components/explore'
 import Trending from './components/trending';
-
+import Predict from './components/prediction'
 
 
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
@@ -40,6 +40,20 @@ class App extends Component {
       tab: 2
     }
   }
+  // 
+  // componentDidMount() {
+  //   if(!this.state.userRef) {
+  //     var newStocks = []
+  //     this.state.userRef.on("value", function(snapshot) {
+  //        snapshot.forEach((itemSnapshot)=> {
+  //            newStocks.push(itemSnapshot.val());
+  //        });
+  //     });
+  //     this.setState({
+  //       stocks: newStocks
+  //     });
+  //   }
+  // }
 
   logout() {
     auth.signOut()
@@ -104,8 +118,8 @@ class App extends Component {
     }else if(this.state.tab === 3) {
       return <Explore userRef={this.state.userRef}/>
     }else if(this.state.tab === 4) {
-      return null;
-      //return <Predict ticker = {[]}/>
+      //return null;
+      return <Predict ticker = {[]}/>
     }
   }
 
