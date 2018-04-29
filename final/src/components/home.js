@@ -8,12 +8,13 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newStocks: [],
       graphData: []
     }
+    this.currStocks= [];
   }
 
   componentDidMount() {
+    this.currStocks = [];
 	   return this.props.stocks.map((stock,i)=>{
 	      alpha.data.daily(stock).then(data => {
 		        var temparr = [];
@@ -23,6 +24,7 @@ class Home extends Component {
 			      }
 			      var newGraphData = this.state.graphData;
 			      newGraphData.push(temparr);
+            this.currStocks.push(stock);
 			      this.setState({
 				       graphData: newGraphData
 			      });
@@ -31,7 +33,7 @@ class Home extends Component {
   }
 
   renderGraphs(){
-	  return this.props.stocks.map((stock,i)=>{
+	  return this.currStocks.map((stock,i)=>{
 	     return  <div key = {stock}><h3>{stock}</h3><Graph points = {this.state.graphData[i]}/></div>;
 	  });
   }
