@@ -8,7 +8,7 @@ class GraphLine extends Component{
  }
  render() {
     return (
-	<div class = "sameline">
+	<div className = "sameline">
       <VictoryChart
   theme={VictoryTheme.material}
   scale={{ x: "time"}}

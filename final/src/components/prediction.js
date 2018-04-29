@@ -138,9 +138,11 @@ class Predict extends Component{
 	<span>
 	 {this.renderPredict()}
 		 {this.state.tlinedata.length>0 &&
-		 <div class = "sameline">
-		 <div>{this.state.ticker[0]}</div>
-		<div>{this.stdev}</div>
+		 <div className = "sameline">
+		 <div>{this.state.ticker[0]}</div><br></br>
+		 <div><p>Standard Deviation in Dollars</p></div> <br></br>
+		<div>{this.stdev}</div> <br></br>
+		<div><p>Prediction for next close price</p></div><br></br>
 			<div>{this.prediction}</div>
 		 </div>
 		 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryBar,VictoryChart,VictoryLine,VictoryTheme } from 'victory';
+import { VictoryBar,VictoryChart,VictoryLine,VictoryTheme, VictoryContainer } from 'victory';
 class Graph extends Component{
  constructor(props)
  {
@@ -11,6 +11,9 @@ class Graph extends Component{
       <VictoryChart
   theme={VictoryTheme.material}
   scale={{ x: "time" }}
+   width={window.innerWidth*0.4}
+  height ={window.innerHeight*0.4}
+   containerComponent={<VictoryContainer responsive={false}/>}
 >
   <VictoryLine
     style={{

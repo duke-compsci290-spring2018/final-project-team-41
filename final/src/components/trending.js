@@ -31,7 +31,7 @@ class Trending extends Component {
 
   renderGraphs(){
 	  return this.state.stocks.map((stock,i)=>{
-	     return <div key = {stock}><h3>{stock}</h3><Graph  points = {this.state.graphData[i]}/></div>;
+	     return <div className = "graphgrid" key = {stock}><h3>{stock}</h3><Graph  points = {this.state.graphData[i]}/></div>;
 	  });
   }
 
@@ -39,7 +39,9 @@ class Trending extends Component {
     return (
 	    <div>
         <h1>Trending Stocks</h1>
+		<div className = "grid">
         {this.renderGraphs()}
+		</div>
       </div>
     );
   }
