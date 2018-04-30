@@ -13,15 +13,24 @@
 	display: inline;
 }
 .rowele{
+	margin-left:5px;
+	margin-right:5px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.rowe{
 	display:inline;
-	margin-left:3px;
-	margin-right:3px;
 }
 .grid{
 	display:grid;
 	grid-template-columns: auto auto;
 }
-
+.side{
+	background-color:#333;
+	color:white;
+	border-radius: 5px;
+	margin-left:5px;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -50,11 +59,20 @@
 .navbar li a:hover:not(.active) {
     background-color: #111;
 }
-
+button{
+	background-color:white;
+	border:2px solid gray;
+	border-radius:4px;
+}
+button:hover {
+    background-color: #D3D3D3; /* Green */
+}
 #loginBtn {
   float: right;
 }
-
+#special{
+	border-radius:50%;
+}
 .trending-li {
   display: block;
 }

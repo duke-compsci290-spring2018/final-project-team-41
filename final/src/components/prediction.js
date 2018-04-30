@@ -55,7 +55,7 @@ class Predict extends Component{
 		 this.firsttime = false;
 		 this.tickervalid = false;
 		 document.getElementById("tick").disabled = true;
-		 var val = document.getElementById("pred").value;
+		 var val = document.getElementById("pred").value.toUpperCase();
 		 this.setState({
 			ticker:[val]
 		 });
@@ -123,7 +123,9 @@ class Predict extends Component{
 	 render(){
 	 return(
 	 <div>
+	 <h1>Stock Prediction</h1>
 	 <span>
+	 <div className = "sameline side">
 	 <div className = "rowele">  <strong>Step 1</strong> Enter Stock:  </div>
 	 <input className = "rowele" type="text" id = "pred"></input>
 	 <div className = "rowele">  <strong>Step 2</strong> Pick Range:  </div>
@@ -136,9 +138,8 @@ class Predict extends Component{
 	
 	<div className = "rowele">  <strong>Step 3</strong> View Stock:  </div>
 	 <button  className = "rowele" onClick={this.setTicker}>View Stock</button>
-	 </span>
 	 <br></br>
-	 <span>
+
 	<div className = "rowele"><strong>Step 4</strong> Pick Regression Type:</div>
 	<select className = "rowele" id = "orderpicker">
 	<option value="1">Linear</option>
@@ -146,20 +147,21 @@ class Predict extends Component{
 	</select>
 	<div className = "rowele"><strong>Step 5</strong> Analyze:</div>
 	 <button className = "rowele" onClick={this.analyze} id = "tick">Analyze Stock</button>
-	 </span>
 	<br></br>
-	<span>
+	</div>
 	 {this.renderPredict()}
 		 {this.state.tlinedata.length>0 &&
-		 <div className = "sameline">
-		 <div>{this.state.ticker[0]}</div><br></br>
-		 <div><p>Standard Deviation in Dollars</p></div> <br></br>
-		<div>{this.stdev}</div> <br></br>
-		<div><p>Prediction for next close price</p></div><br></br>
-			<div>{this.prediction}</div>
+		 <div className = "sameline side">
+		 <div className = "rowele"><strong>{this.state.ticker[0]}</strong></div><br></br>
+		 <div className = "rowele"><p>Prediction for next close price</p></div><br></br>
+			<div className = "rowele">{this.prediction}</div><br></br>
+		 <div className = "rowele"><p>Standard Deviation in Dollars</p></div> <br></br>
+		<div className = "rowele">{this.stdev}</div> 
+		
 		 </div>
 		 }
-	</span>
+	
+	 </span>
 	 </div>
 	 );
 	 }

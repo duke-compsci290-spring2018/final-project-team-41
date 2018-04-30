@@ -12,8 +12,8 @@ class GraphLine extends Component{
       <VictoryChart
   theme={VictoryTheme.material}
   scale={{ x: "time"}}
-  width={window.innerWidth*0.8}
-  height ={window.innerHeight*0.75}
+  width={window.innerWidth*0.6}
+  height ={window.innerHeight*0.7}
    containerComponent={
               <VictoryContainer responsive={false}
               />
