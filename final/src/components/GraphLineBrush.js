@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryBar,VictoryChart,VictoryLine,VictoryTheme,VictoryContainer,VictoryBrushContainer,VictoryZoomContainer } from 'victory';
+import { VictoryChart,VictoryLine,VictoryTheme,VictoryBrushContainer,VictoryZoomContainer } from 'victory';
 class GraphLineBrush extends Component{
  constructor(props)
  {
@@ -45,7 +45,7 @@ class GraphLineBrush extends Component{
     }}
     data={this.props.points}
   />
-  
+
 </VictoryChart>
 <VictoryChart
 padding={{top: 0, left: 50, right: 50, bottom: 30}}

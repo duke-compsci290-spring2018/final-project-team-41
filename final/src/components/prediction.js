@@ -22,7 +22,7 @@ class Predict extends Component{
 	 }
 	 componentDidMount() {
 		 document.getElementById("tick").disabled = true;
-	   return this.props.ticker.map((stock,i)=>{
+	   return this.props.ticker.forEach((stock,i)=>{
 	      alpha.data.daily(stock).then(data => {
 		    var temparr = [];
 			  var temp = data['Time Series (Daily)'];
@@ -59,7 +59,7 @@ class Predict extends Component{
 		 this.setState({
 			ticker:[val]
 		 });
-		 
+
 		  alpha.data.daily(val).then(data => {
 			  this.tickervalid = true;
 			  document.getElementById("tick").disabled = false;
@@ -84,13 +84,12 @@ class Predict extends Component{
 			//console.log(this.state.graphData);
 			//console.log(this.state.tlinedata);
 			}
-			
+
 			).catch(function(error) { alert("invalid stock ticker"); });
-		 
+
 	 }
 
 	 analyze(){
-		 console.log("hi");
 		 this.trend = [];
 		var temptrendline = [];
 		for (var k in this.state.graphData){
@@ -135,7 +134,7 @@ class Predict extends Component{
 	<option value="20">20 Days</option>
 	<option value="10">10 Days</option>
 	</select>
-	
+
 	<div className = "rowele">  <strong>Step 3</strong> View Stock:  </div>
 	 <button  className = "rowele" onClick={this.setTicker}>View Stock</button>
 	 <br></br>
@@ -156,11 +155,11 @@ class Predict extends Component{
 		 <div className = "rowele"><p>Prediction for next close price</p></div><br></br>
 			<div className = "rowele">{this.prediction}</div><br></br>
 		 <div className = "rowele"><p>Standard Deviation in Dollars</p></div> <br></br>
-		<div className = "rowele">{this.stdev}</div> 
-		
+		<div className = "rowele">{this.stdev}</div>
+
 		 </div>
 		 }
-	
+
 	 </span>
 	 </div>
 	 );

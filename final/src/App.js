@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from './firebase.js';
 import './App.css';
-import Graph from './components/Graph.js';
 import Home from './components/home';
 import Explore from './components/explore'
 import Trending from './components/trending';
@@ -10,7 +9,6 @@ import Admin from './components/admin';
 import About from './components/about';
 
 const ADMIN_EMAIL = "stocknotebook1@gmail.com";
-const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 var users = firebase.database().ref('users');
 var trendingRef = firebase.database().ref('trending');
 window.export = true;
@@ -83,7 +81,7 @@ class App extends Component {
         }
         users.once("value",(snapshot)=>{
           snapshot.forEach((itemSnapshot)=> {
-            if(itemSnapshot.child('email').val() == newUser.email){
+            if(String(itemSnapshot.child('email').val()) === String(newUser.email)){
               existed = true;
 			        oldUser = itemSnapshot['key'];
             }

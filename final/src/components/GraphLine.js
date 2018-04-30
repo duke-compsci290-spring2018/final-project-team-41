@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryBar,VictoryChart,VictoryLine,VictoryTheme,VictoryContainer,VictoryBrushContainer,VictoryZoomContainer } from 'victory';
+import { VictoryChart,VictoryLine,VictoryTheme,VictoryContainer } from 'victory';
 class GraphLine extends Component{
  constructor(props)
  {

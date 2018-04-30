@@ -27,13 +27,15 @@ class Trending extends Component {
 			      this.setState({
 				       graphData: newGraphData
 			      });
+            return;
 			  });
+        return 0;
 		});
   }
 
   renderGraphs(){
 	  return this.currStocks.map((stock,i)=>{
-	     return <div className = "graphgrid" key = {stock}><h3>{stock}</h3><Graph  points = {this.state.graphData[i]}/></div>;
+	     return (<div className = "graphgrid" key = {stock}><h3>{stock}</h3><Graph  points = {this.state.graphData[i]}/></div>);
 	  });
   }
 

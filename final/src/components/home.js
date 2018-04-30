@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Graph from './Graph.js';
-import { VictoryBar,VictoryChart,VictoryLine,VictoryTheme } from 'victory';
 
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 
@@ -16,7 +15,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.currStocks = [];
-	   return this.props.stocks.map((stock,i)=>{
+	   return this.props.stocks.forEach((stock,i)=>{
 	      alpha.data.daily(stock).then(data => {
 		        var temparr = [];
 			      var temp = data['Time Series (Daily)'];
@@ -63,7 +62,7 @@ class Home extends Component {
 	  var range = document.getElementById("filterpicker").value;
 	  this.currStocks = [];
 	   var newGraphData = [];
-	   return this.props.stocks.map((stock,i)=>{
+	   return this.props.stocks.forEach((stock,i)=>{
 	      alpha.data.daily(stock).then(data => {
 		        var temparr = [];
 			      var temp = data['Time Series (Daily)'];
