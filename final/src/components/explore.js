@@ -78,7 +78,7 @@ class Explore extends Component{
 
 	 render(){
 	 return(
-	 <div>
+	 <div id="explore-div">
 	 <h1>Explore a Stock</h1>
 	 <input type="text" id = "pred"></input>
 	 <button onClick={this.setTicker}>Explore Stock</button>

@@ -72,7 +72,7 @@ class Admin extends Component {
 
   render() {
     return(
-       <div>
+       <div id="admin-div">
         <h1>Admin Page</h1>
         <h5>Add Stock to Trending Page:</h5>
         <input type="text" id = "adminInput"></input>

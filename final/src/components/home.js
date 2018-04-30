@@ -55,7 +55,7 @@ class Home extends Component {
 
   renderGraphs(){
 	  return this.currStocks.map((stock,i)=>{
-	     return  <div className = "graphgrid" key = {stock}><h3>{stock}</h3><button onClick={() => this.removeStock(stock)}>x</button><Graph points = {this.state.graphData[i]}/></div>;
+	     return  <div className = "graphgrid" key = {stock}><button id = "special" onClick={() => this.removeStock(stock)}>&#10005;</button><strong>{stock}</strong><Graph points = {this.state.graphData[i]}/></div>;
 	  });
   }
 
@@ -89,8 +89,8 @@ class Home extends Component {
     return (
 	    <div id="home-div">
         <h1>Your Stocks</h1>
-		 <button onClick={this.filterStocks}>Filter Stocks</button>
-			 <select id = "filterpicker">
+		<span>Filter: </span>
+			 <select id = "filterpicker" onChange = {this.filterStocks}>
 	<option value="100">100 Days</option>
 	<option value="40">60 Days</option>
 	<option value="20">20 Days</option>
