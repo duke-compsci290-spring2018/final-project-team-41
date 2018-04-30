@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GraphLine from './GraphLine.js';
 import regression from 'regression';
-const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
+const alpha = require('../alphavantage')({ key: '73STJHH4687S6JU0' });
 var math = require('mathjs');
 
 class Predict extends Component{

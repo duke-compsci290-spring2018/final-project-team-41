@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
+const alpha = require('../alphavantage')({ key: '73STJHH4687S6JU0' });
 
 class Admin extends Component {
   constructor(props){

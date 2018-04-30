@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Graph from './Graph.js';
 
-const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
+const alpha = require('../alphavantage')({ key: '73STJHH4687S6JU0' });
 
 class Home extends Component {
   constructor(props) {

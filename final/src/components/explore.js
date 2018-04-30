@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GraphLineBrush from "./GraphLineBrush.js"
-const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
+const alpha = require('../alphavantage')({ key: '73STJHH4687S6JU0' });
 class Explore extends Component{
 	 constructor(props) {
     super(props);
