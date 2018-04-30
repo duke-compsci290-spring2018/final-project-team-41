@@ -1,0 +1,2 @@
+I used the stock book app at 7 pm on 4/29. The tool is able to view stock data and then save it to a portfolio. I thought the regression tool was pretty neat. I don’t think I would use this tool but I think it would be more useful if it were a phone widget since it’s not something I would actively look at. A suggestion I have for this tool is to have a stock suggestions list based on the ones that you saved. 
+Emily Meng
