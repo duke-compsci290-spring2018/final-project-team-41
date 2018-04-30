@@ -1,0 +1,7 @@
+Name: Sunny Zhang
+Time: 4/29 10:30pm
+Comments:
+1. The graphs took some time to load, but being able to dynamically interact with the graphs is really cool.
+2. The overall concept is interesting to allow users to manage their stocks.
+3. Having to input the stock ticker instead of company name is a downside.
+4. It might be better to have the functions of explore stock and predict stock in the same page.
