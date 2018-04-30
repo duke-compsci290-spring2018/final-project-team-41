@@ -39,7 +39,7 @@ class Trending extends Component {
 
   render() {
     return (
-	    <div>
+	    <div id="trending-div">
         <h1>Trending Stocks</h1>
 		<div className = "grid">
         {this.renderGraphs()}

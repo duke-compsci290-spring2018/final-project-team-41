@@ -7,11 +7,13 @@ import Explore from './components/explore'
 import Trending from './components/trending';
 import Predict from './components/prediction';
 import Admin from './components/admin';
+import About from './components/about';
 
 const ADMIN_EMAIL = "stocknotebook1@gmail.com";
 const alpha = require('alphavantage')({ key: '73STJHH4687S6JU0' });
 var users = firebase.database().ref('users');
 var trendingRef = firebase.database().ref('trending');
+window.export = true;
 
 class App extends Component {
   constructor(props) {
@@ -41,7 +43,7 @@ class App extends Component {
       user: null,
       userRef: null,
 	    stocks: ['MSFT','AMZN'],
-      tab: 3
+      tab: 6
     }
   }
 
@@ -125,6 +127,8 @@ class App extends Component {
       return <Predict ticker = {[]}/>
     }else if(this.state.tab === 5) {
       return <Admin stocks={this.trending} trendingRef={trendingRef}/>;
+    }else if(this.state.tab === 6) {
+      return <About data={firebase.database()}/>
     }
   }
 
@@ -142,11 +146,17 @@ class App extends Component {
       return;
     }else if(newTab.includes("Explore")) {
       this.setState({tab:3});
+      window.export = false;
+      return;
+    }else if(newTab.includes("About")) {
+      this.setState({tab:6});
+      window.export = true;
       return;
     }
     if(this.state.user){
-      if(newTab.includes("Home")) {
-        var newStocks = []
+      if(newTab.includes("Stocks")) {
+        var newStocks = [];
+        window.export = false;
         this.state.userRef.on("value", function(snapshot) {
            snapshot.forEach((itemSnapshot)=> {
                newStocks.push(itemSnapshot.val());
@@ -160,9 +170,14 @@ class App extends Component {
         this.setState({tab:4});
       }else if(newTab.includes("Admin")) {
         this.setState({tab:5});
+        window.export = false;
       }
     }else{
-      alert('Please Log In');
+      if(newTab.includes("Predict")) {
+        alert("This is a premium account feature. Please log in.")
+      }else{
+        alert('Please Log In');
+      }
     }
 
   }
@@ -171,7 +186,12 @@ class App extends Component {
     return (
 	<div>
     <ul className="navbar">
-      <li><a onClick={this.changeTab}>Home</a></li>
+      {this.state.user ?
+        <li id='username'><a onClick={this.changeTab}> {this.state.user.displayName}<span>&#39;</span>s Stocks</a></li>
+        :
+        <li><a onClick={this.changeTab}>Your Stocks</a></li>
+      }
+      <li><a onClick={this.changeTab}>About</a></li>
       <li><a onClick={this.changeTab}>Trending</a></li>
       <li><a onClick={this.changeTab}>Explore</a></li>
       <li><a onClick={this.changeTab}>Predict</a></li>
@@ -187,14 +207,6 @@ class App extends Component {
       </li>
     </ul>
       <div>
-
-        {this.state.user ?
-        <div>
-            <h4>{this.state.user.displayName}</h4>
-        </div>
-        :
-        <div></div>
-        }
       </div>
       {this.directTab()}
 

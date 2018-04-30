@@ -58,7 +58,7 @@ class Home extends Component {
 	     return  <div className = "graphgrid" key = {stock}><h3>{stock}</h3><button onClick={() => this.removeStock(stock)}>x</button><Graph points = {this.state.graphData[i]}/></div>;
 	  });
   }
-  
+
   filterStocks(){
 	  var range = document.getElementById("filterpicker").value;
 	  this.currStocks = [];
@@ -87,7 +87,7 @@ class Home extends Component {
 
   render() {
     return (
-	    <div>
+	    <div id="home-div">
         <h1>Your Stocks</h1>
 		 <button onClick={this.filterStocks}>Filter Stocks</button>
 			 <select id = "filterpicker">

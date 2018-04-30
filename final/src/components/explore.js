@@ -20,7 +20,7 @@ class Explore extends Component{
 		 document.getElementById("tick").disabled = true;
 		 document.getElementById("pred").value = "NVDA";
 		 this.setTicker();
-		 
+
    }
 
 	 renderExplore(){
@@ -79,6 +79,7 @@ class Explore extends Component{
 	 render(){
 	 return(
 	 <div>
+	 <h1>Explore a Stock</h1>
 	 <input type="text" id = "pred"></input>
 	 <button onClick={this.setTicker}>Explore Stock</button>
 	 <button onClick={this.addStock} id = "tick">Add Stock</button><br></br>
